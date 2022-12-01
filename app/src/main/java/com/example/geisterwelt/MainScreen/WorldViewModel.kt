@@ -33,25 +33,25 @@ class WorldViewModel: ViewModel() {
     fun up(){
 
         if (mHero.value?.checkUp(Karte) == true) {
-            mHero.value = mHero.value?.copy(mY = mHero.value!!.mY.minus(1))
+            mHero.value = mHero.value?.copy(mY = mHero.value!!.mY.minus(1), mMoves = mHero.value!!.mMoves.plus(1))
         }
     }
 
     fun down(){
         if (mHero.value?.checkDown() == true) {
-            mHero.value = mHero.value?.copy(mY = mHero.value!!.mY.plus(1))
+            mHero.value = mHero.value?.copy(mY = mHero.value!!.mY.plus(1), mMoves = mHero.value!!.mMoves.plus(1))
         }
     }
 
     fun left(){
         if (mHero.value?.checkLeft() == true) {
-            mHero.value = mHero.value?.copy(mX = mHero.value!!.mX.minus(1))
+            mHero.value = mHero.value?.copy(mX = mHero.value!!.mX.minus(1), mMoves = mHero.value!!.mMoves.plus(1))
         }
     }
 
     fun right(){
         if (mHero.value?.checkRight() == true) {
-            mHero.value = mHero.value?.copy(mX = mHero.value!!.mX.plus(1))
+            mHero.value = mHero.value?.copy(mX = mHero.value!!.mX.plus(1), mMoves = mHero.value!!.mMoves.plus(1))
         }
     }
 }

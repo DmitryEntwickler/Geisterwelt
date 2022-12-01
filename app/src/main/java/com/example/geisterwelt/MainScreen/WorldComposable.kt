@@ -3,6 +3,7 @@ package com.example.geisterwelt.MainScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -32,20 +33,30 @@ fun WorldComposable(mWorldViewModel: WorldViewModel = viewModel()) {
 
     val mSheetScope = rememberCoroutineScope()
     val mBottomSheetScaffoldState =
-        rememberBottomSheetScaffoldState(bottomSheetState = BottomSheetState(BottomSheetValue.Expanded))
+        rememberBottomSheetScaffoldState(bottomSheetState = BottomSheetState(BottomSheetValue.Collapsed))
 
     BottomSheetScaffold(
         scaffoldState = mBottomSheetScaffoldState,
         sheetContent = {
-            Box(
+            Column(
                 Modifier
                     .fillMaxWidth()
-                    .height(100.dp)
+                    .fillMaxHeight(0.3F)
                     .background(colorResource(id = R.color.bottomSheetColor))
             ) {
-                Text(text = "Hello from sheet")
+                Spacer(modifier = Modifier.height(32.dp))
+                Text(
+                    text = "X: $mX, Y: $mY",
+                    modifier = Modifier.padding(16.dp)
+                )
+                Text(
+                    text = "Moves: ${mHero?.mMoves}",
+                    modifier = Modifier.padding(16.dp)
+                )
             }
-        }, sheetPeekHeight = 30.dp
+        },
+        sheetPeekHeight = 16.dp,
+        sheetShape = RoundedCornerShape(topEnd = 16.dp, topStart = 16.dp),
     ) {
 
         // content of the Scaffold
