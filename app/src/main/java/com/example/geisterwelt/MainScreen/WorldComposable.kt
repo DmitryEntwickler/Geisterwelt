@@ -30,10 +30,12 @@ fun WorldComposable(mWorldViewModel: WorldViewModel = viewModel()) {
     val mHero by mWorldViewModel.mHero.observeAsState()
     val mX by mWorldViewModel.mX.observeAsState()
     val mY by mWorldViewModel.mY.observeAsState()
+    val mKarte = mWorldViewModel.mKarte
+    val mPictureMapLevelOne = mWorldViewModel.mPictureMapLevelOne
+    val mPictureMapLevelTwo = mWorldViewModel.mPictureMapLevelTwo
 
     val mSheetScope = rememberCoroutineScope()
-    val mBottomSheetScaffoldState =
-        rememberBottomSheetScaffoldState(bottomSheetState = BottomSheetState(BottomSheetValue.Collapsed))
+    val mBottomSheetScaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = BottomSheetState(BottomSheetValue.Collapsed))
 
     BottomSheetScaffold(
         scaffoldState = mBottomSheetScaffoldState,
@@ -72,23 +74,33 @@ fun WorldComposable(mWorldViewModel: WorldViewModel = viewModel()) {
                 color = Color.White
             )
 
+            // Two Pictures
             Row(
                 modifier = Modifier
                     .padding(horizontal = 8.dp, vertical = 16.dp)
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Image(
-                    painterResource(R.drawable.wald2),
-                    contentDescription = "",
-                    modifier = Modifier.size(120.dp)
-                )
-                Image(
-                    painterResource(R.drawable.stein),
-                    contentDescription = "",
-                    modifier = Modifier.size(120.dp)
-                )
+                mPictureMapLevelOne[mKarte[mX!!][mY!!].mEbene1]
+                    ?.let { it1 -> painterResource(id = it1) }?.let { it2 ->
+                        Image(
+                            //painter = painterResource(id = mKarte[mX!!][mY!!].mLevelOnePicture),
+                            painter = it2,
+                            contentDescription = "",
+                            modifier = Modifier.size(120.dp)
+                        )
+                    }
+                mPictureMapLevelTwo[mKarte[mX!!][mY!!].mEbene2]
+                    ?.let { it1 -> painterResource(it1) }?.let { it2 ->
+                        Image(
+                            painter = it2,
+                            contentDescription = "",
+                            modifier = Modifier.size(120.dp)
+                        )
+                    }
             }
+
+
             Text(
                 text = "Nadelwald",
                 modifier = Modifier.padding(8.dp),

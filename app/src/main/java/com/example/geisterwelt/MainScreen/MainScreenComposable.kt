@@ -17,6 +17,7 @@ import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
 
 
+@ExperimentalMaterialApi
 @ExperimentalPagerApi
 @Composable
 fun MainScreenComposable() {

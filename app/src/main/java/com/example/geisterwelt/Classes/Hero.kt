@@ -6,16 +6,17 @@ data class Hero(var mX: Int = 5, var mY: Int = 5, var mMoves: Int = 0) {
 
 
     fun checkUp(Karte: Array<Array<Field>>): Boolean{
-        return Karte[mX][mY-1].mEbene1 == 0
+        return mY>1
+        //return Karte[mX][mY-1].mEbene1 < 10
     }
     fun checkDown(): Boolean{
-        return mY<10
+        return mY<100
     }
     fun checkLeft(): Boolean{
         return mX>1
     }
     fun checkRight(): Boolean{
-        return mX<10
+        return mX<100
     }
 
 }
